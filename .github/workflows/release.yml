@@ -1,0 +1,40 @@
+---
+# $schema=https://schemastore.org/https://www.schemastore.org/github-action.json
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  packages: write
+  issues: read
+  pull-requests: read
+
+jobs:
+  bump-version:
+    name: Bump Version
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.bump.outputs.version }}
+      skipped: ${{ steps.bump.outputs.skipped }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: jefflinse/pr-semver-bump@v1.7.4
+        id: bump
+        name: Bump and Tag Version
+        with:
+          mode: bump
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          require-release-notes: false
+          major-label: major
+          minor-label: minor
+          patch-label: patch
+          noop-labels: "dont-release"
+          release-notes-prefix: "### RELEASE NOTES"
+          with-v: true

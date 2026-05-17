@@ -1,0 +1,30 @@
+---
+# $schema=https://schemastore.org/https://www.schemastore.org/github-action.json
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    name: Label PR
+    steps:
+      - name: Checkout code
+        uses: actions/labeler@v6
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+        # setup markdownlint and prettier linters
