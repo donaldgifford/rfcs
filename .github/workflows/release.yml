@@ -21,7 +21,7 @@ jobs:
       tag: ${{ steps.bump.outputs.version }}
       skipped: ${{ steps.bump.outputs.skipped }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.3
         with:
           fetch-depth: 0
 
