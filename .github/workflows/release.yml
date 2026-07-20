@@ -21,11 +21,11 @@ jobs:
       tag: ${{ steps.bump.outputs.version }}
       skipped: ${{ steps.bump.outputs.skipped }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
 
-      - uses: jefflinse/pr-semver-bump@v1.7.4
+      - uses: jefflinse/pr-semver-bump@c4e5e589f9f0679723b27abb5f8a5c649e69cf80 # v1.7.4
         id: bump
         name: Bump and Tag Version
         with:
